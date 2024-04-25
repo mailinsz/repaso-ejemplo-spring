@@ -2,24 +2,25 @@
 	"info": {
 		"_postman_id": "fcacb902-abaf-4260-8427-f9e1aacca661",
 		"name": "REST: Libros",
-		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "# 🚀Ejemplo de Libros para EPERS\n\nEjemplos de Requests que se le pueden hacer a nuestra aplicación Spring.\n\n## 🔖 Request disponibles\n\n#### **Guardar libro**\n\nPOST: [http://localhost:8080/libro](http://localhost:8080/libro)\n\nEjemplo de Body:\n\n```\n{\n\"titulo\" : \"Dune\",\n    \"autor\" : \"Frank Herbert\",\n    \"genero\" : \"Ciencia Ficcion\",\n    \"paginas\" : 704\n}\n\n ```\n\n#### **Recuperar todos los libros**\n\nGET: [http://localhost:8080/libro/todos](http://localhost:8080/libro/todos)\n\n#### **Recuperar los 5 libros mas largos**\n\nGET: [http://localhost:8080/libro/masLargos](http://localhost:8080/libro/masLargos)\n\n#### **Recuperar todos los libros de cierto genero**\n\nGET: [http://localhost:8080/libro/genero/terror](http://localhost:8080/libro/genero/terror)\n\n(ejemplo con el genero Terror)\n\n#### **Recuperar todos los libros de cierto autor**\n\nGET: [http://localhost:8080/libro/autor/stephenking](http://localhost:8080/libro/autor/stephenking)\n\n(ejemplo con el autor Sthepen King)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "4392605"
 	},
 	"item": [
 		{
-			"name": "Post data",
+			"name": "Guardar libro",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"type": "text/javascript",
 						"exec": [
 							"pm.test(\"Successful POST request\", function () {",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
 							"});",
 							""
-						]
+						],
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -28,22 +29,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"raw": "{\n\t\"titulo\" : \"Dune\",\n    \"autor\" : \"Frank Herbert\",\n    \"genero\" : \"Ciencia Ficcion\",\n    \"paginas\" : 704\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": {
-					"raw": "{{base_url}}/info",
-					"host": [
-						"{{base_url}}"
-					],
-					"path": [
-						"info"
-					]
-				},
+				"url": "http://localhost:8080/libro",
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
 			},
 			"response": []
@@ -67,18 +60,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/libro/todos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"libro",
-						"todos"
-					]
-				},
+				"url": "http://localhost:8080/libro/todos",
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
 			},
 			"response": []
@@ -102,18 +84,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/libro/maslargos",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"libro",
-						"maslargos"
-					]
-				},
+				"url": "http://localhost:8080/libro/masLargos",
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
 			},
 			"response": []
@@ -137,19 +108,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/libro/genero/terror",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"libro",
-						"genero",
-						"terror"
-					]
-				},
+				"url": "http://localhost:8080/libro/genero/terror",
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
 			},
 			"response": []
@@ -173,19 +132,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/libro/autor/stephenking",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"libro",
-						"autor",
-						"stephenking"
-					]
-				},
+				"url": "http://localhost:8080/libro/autor/stephenking",
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
 			},
 			"response": []
